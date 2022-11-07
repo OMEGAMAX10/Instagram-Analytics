@@ -131,3 +131,7 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+
+# Other folders
+data/

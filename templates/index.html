@@ -42,8 +42,9 @@
                     <br>
                 </p>
                 <div id="upload_data" align="center" onselectstart="return false">
-                    <form id="upload_form" action="upload/" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="fileToUpload" id="fileToUpload" accept="zip/*" required>
+                    <form id="upload_form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="fileToUpload" id="id_fileToUpload" accept="zip/*" required>
                         <p unselectable="on">Drag the archive with your data here or click in this area</p>
                         <button type="submit">Upload ZIP Archive</button>
                     </form>
