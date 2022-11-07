@@ -21,7 +21,11 @@
 
 <body style="background: var(--bs-gray-800);">
     <nav class="navbar navbar-light navbar-expand-md" style="background: #a02d96;font-family: Archivo, sans-serif;">
-        <div class="container-fluid"><a class="navbar-brand" href="{% url 'index' %}" style="color: #d6afd6;font-weight: bold;font-size: 24px;margin-right: 20px;margin-left: 20px;">Instagram
+        <div class="container-fluid">
+            <div class="logo-image">
+                <img src="{% static 'images/instagram_analytics.png' %}" class="img-fluid" alt="logo" style="width: 50px;">
+            </div>
+            <a class="navbar-brand" href="{% url 'index' %}" style="color: #d6afd6;font-weight: bold;font-size: 24px;margin-right: 20px;margin-left: 20px;">Instagram
                 Analytics</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 30px;font-size: 20px;">
@@ -44,11 +48,10 @@
                 </p>
                 <div id="upload_data" align="center" onselectstart="return false">
                     <form id="upload_form" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% include '_messages.html' %}
+                        {% csrf_token %} {% include '_messages.html' %}
                         <input type="file" name="fileToUpload" id="id_fileToUpload" accept=".zip" required>
                         <p unselectable="on">Drag the archive with your data here or click in this area</p>
-                        <button type="submit">Upload ZIP Archive</button>
+                        <button type="submit"><span>Upload ZIP Archive</span></button>
                     </form>
                 </div>
             </div>
@@ -94,8 +97,8 @@
             </div>
         </div>
     </footer>
-    <script src="{% static "/bootstrap/js/bootstrap.min.js" %}"></script>
-    <script src="{% static "/js/bs-init.js" %}"></script>
+    <script src="{% static " /bootstrap/js/bootstrap.min.js " %}"></script>
+    <script src="{% static " /js/bs-init.js " %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.getElementById("upload_form").onsubmit = function() {

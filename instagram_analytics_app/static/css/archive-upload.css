@@ -35,17 +35,15 @@
 }
 
 #upload_form button {
-    margin: 0;
     color: #d6afd6;
     background: #a02d96;
     border: none;
     width: 508px;
     height: 35px;
-    margin-top: 15px;
-    margin-left: -4px;
+    margin: 15px 0 0 -4px;
     border-radius: 16px;
     border-bottom: 4px solid #85257d;
-    transition: all .2s ease;
+    transition: all 0.5s ease;
     outline: none;
     font-family: Archivo, sans-serif;
     font-size: 18px;
@@ -55,6 +53,31 @@
     background: #85257d;
     border-bottom: 4px solid #6b1c65;
     color: #b391b3;
+}
+
+#upload_form button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#upload_form button span:after {
+  content: '>>';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -30px;
+  transition: 0.5s;
+}
+
+#upload_form button:hover span {
+  padding-right: 30px;
+}
+
+#upload_form button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 #upload_form button:active {

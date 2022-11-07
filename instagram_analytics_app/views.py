@@ -16,7 +16,10 @@ class InstagramAnalyticsIndexView(FormView):
 
     def form_valid(self, form):
         file = form.cleaned_data['fileToUpload']
-        datetime_upload = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        if zipfile.is_zipfile(file) is False:
+            messages.error(self.request, 'Please upload a valid zip file!')
+            return super().form_invalid(form)
+        datetime_upload = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         folder_name = os.path.join('data', datetime_upload)
         file_path = os.path.join(folder_name, file.name)
         if not os.path.exists(folder_name):
