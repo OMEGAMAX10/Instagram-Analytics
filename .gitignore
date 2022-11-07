@@ -109,6 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+venv*/
 venv_instagram_analytics/
 
 # Spyder project settings

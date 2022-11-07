@@ -4,6 +4,7 @@ import zipfile
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.core.files.storage import default_storage
+from django.contrib import messages
 
 from instagram_analytics_app.forms import UploadZipForm
 
@@ -26,4 +27,5 @@ class InstagramAnalyticsIndexView(FormView):
         with zipfile.ZipFile(file_path, 'r') as zip_ref:
             zip_ref.extractall(folder_name)
         os.remove(file_path)
+        messages.success(self.request, f'Data archive {file.name} uploaded successfully at {datetime.datetime.now().strftime("%H:%M:%S, %d.%m.%Y")}.')
         return super().form_valid(form)
