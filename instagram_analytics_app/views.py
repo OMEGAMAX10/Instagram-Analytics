@@ -1,11 +1,14 @@
-import os
 import datetime
 import zipfile
-from django.urls import reverse_lazy
-from django.views.generic import FormView
-from django.core.files.storage import default_storage
-from django.contrib import messages
 
+from django.contrib import messages
+from django.core.files.storage import default_storage
+from django.http import HttpResponse
+from django.template import loader
+from django.urls import reverse_lazy
+from django.views.generic import FormView, View
+
+from get_followers_info import *
 from instagram_analytics_app.forms import UploadZipForm
 
 
@@ -32,3 +35,39 @@ class InstagramAnalyticsIndexView(FormView):
         os.remove(file_path)
         messages.success(self.request, f'Data archive {file.name} uploaded successfully at {datetime.datetime.now().strftime("%H:%M:%S, %d.%m.%Y")}.')
         return super().form_valid(form)
+
+
+class FollowersAnalyticsView(View):
+    template = loader.get_template('followers_analytics.html')
+
+    def get_followers_context(self):
+        data_dirs = os.listdir('data')
+        context = {
+            'followers_list': 0,
+            'followings_list': 0,
+            'mutual_followers': 0,
+            'not_following_me_back': 0,
+            'i_dont_follow_back': 0,
+        }
+        if len(data_dirs) > 0:
+            data_dirs.sort(reverse=True)
+            data_dir = os.path.join('data', data_dirs[0])
+            followers_list = get_followers_list(data_dir)
+            followings_list = get_followings_list(data_dir)
+            mutual_followers = get_mutual_followers(followers_list, followings_list)
+            not_following_me_back = get_not_following_me_back(followers_list, followings_list)
+            i_dont_follow_back = get_i_dont_follow_back(followers_list, followings_list)
+            context['followers_list'] = len(followers_list)
+            context['followings_list'] = len(followings_list)
+            context['mutual_followers'] = len(mutual_followers)
+            context['not_following_me_back'] = len(not_following_me_back)
+            context['i_dont_follow_back'] = len(i_dont_follow_back)
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_followers_context()
+        return HttpResponse(self.template.render(context, request))
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_followers_context()
+        return HttpResponse(self.template.render(context, request))

@@ -37,26 +37,46 @@
             </div>
         </div>
     </nav>
-    <section class="py-4 py-xl-5">
-        <div class="container">
-            <div class="text-center p-4 p-lg-5">
-                <h1 class="fw-bold mb-4" style="color: #d6afd6;font-family: Archivo, sans-serif;">Welcome to Instagram Analytics, your personal Instagram data assistant!</h1>
-                <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif;">You can view data about the accounts you follow or follow you.</h3>
-                <p style="font-family: Archivo, sans-serif;color: #b5d1e8;font-size: 18px;"><br><span style="color: rgb(181, 209, 232);">In order to provide a deep analysis of your data, you must
-                        download your Instagram account data in JSON</span>&nbsp;format. After you receive the link to the archive which contains the archived account data, upload it here, so we can create your account analysis!
-                    <br>
-                </p>
-                <div id="upload_data" align="center" onselectstart="return false">
-                    <form id="upload_form" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %} {% include '_messages.html' %}
-                        <input type="file" name="fileToUpload" id="id_fileToUpload" accept=".zip" required>
-                        <p unselectable="on">Drag the archive with your data here or click in this area</p>
-                        <button type="submit"><span>Upload ZIP Archive</span></button>
-                    </form>
+
+    <section>
+        <div class="container py-4 py-xl-5" style>
+            <div class="text-center text-white-50 bg-primary border rounded border-0 p-3" style="background: linear-gradient(#a02d96, #6d28aa);">
+                <div class="row row-cols-2 row-cols-md-5">
+                    <div class="col">
+                        <div class="p-3">
+                            <h4 class="display-5 fw-bold text-white mb-0" style="font-family: Archivo, sans-serif;">{{ followers_list }}</h4>
+                            <p class="mb-0" style="font-family: Archivo, sans-serif;">Followers</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-3">
+                            <h4 class="display-5 fw-bold text-white mb-0" style="font-family: Archivo, sans-serif;">{{ followings_list }}</h4>
+                            <p class="mb-0" style="font-family: Archivo, sans-serif;">Following</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-3">
+                            <h4 class="display-5 fw-bold text-white mb-0" style="font-family: Archivo, sans-serif;">{{ mutual_followers }}</h4>
+                            <p class="mb-0" style="font-family: Archivo, sans-serif;">Mutual followers</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-3">
+                            <h4 class="display-5 fw-bold text-white mb-0" style="font-family: Archivo, sans-serif;">{{ not_following_me_back }}</h4>
+                            <p class="mb-0" style="font-family: Archivo, sans-serif;">Don&#39;t follow you back</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-3">
+                            <h4 class="display-5 fw-bold text-white mb-0" style="font-family: Archivo, sans-serif;">{{ i_dont_follow_back }}</h4>
+                            <p class="mb-0" style="font-family: Archivo, sans-serif;">You don&#39;t follow back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
     <footer class="text-center py-4">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-3">
@@ -100,14 +120,7 @@
     <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static '/js/bs-init.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.getElementById("upload_form").onsubmit = function() {
-            location.reload(true);
-        }
-        $('form input').change(function() {
-            $('form p').text(this.files[0].name + " ready for upload");
-        });
-    </script>
+
 </body>
 
 </html>
