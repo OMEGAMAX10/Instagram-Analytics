@@ -140,9 +140,9 @@
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in followers_list%}
-                                <li>
-                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
-                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                <li style="list-style-type: none; background: #86b7fe; border-radius: 10px; margin: 10px 0 10px 50px">
+                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 50px">
+                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -154,8 +154,8 @@
                         <ul>
                             {% for account in followings_list%}
                                 <li>
-                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
-                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
+                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -167,8 +167,8 @@
                         <ul>
                             {% for account in mutual_followers%}
                                 <li>
-                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
-                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
+                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -180,8 +180,8 @@
                         <ul>
                             {% for account in not_following_me_back%}
                                 <li>
-                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
-                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
+                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -193,8 +193,8 @@
                         <ul>
                             {% for account in i_dont_follow_back%}
                                 <li>
-                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
-                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
+                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
