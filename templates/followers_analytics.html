@@ -24,6 +24,9 @@
             border-radius: 100%;
             box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
         }
+        .nav-link.active {
+            background: linear-gradient(#a02d96, #6d28aa);
+        }
     </style>
 </head>
 
@@ -53,25 +56,22 @@
         </div>
     </div>
 </nav>
-
 <section class="py-4 py-xl-4">
-    <div class="text-center p-4 p-lg-4">
+    <div class="text-center p-4 p-lg-4 align-content-center">
         <h1 class="fw-bold mb-4" style="color: #d6afd6;font-family: Archivo, sans-serif;">Followers and followings
             analytics</h1>
-
-        <div class="card d-flex justify-content-center" style="background: linear-gradient(#a02d96, #6d28aa);font-family: Archivo, sans-serif; height: 200px; border-radius: 20px;">
+        <div class="card d-flex align-content-center" style="background: linear-gradient(#a02d96, #6d28aa);font-family: Archivo, sans-serif; min-height: 120px; max-width: 500px; border-radius: 20px; margin: auto">
             <div class="card-body">
-                <h3 class="card-title" style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-bottom: 20px">Account data for: </h3>
-                <div class="row row-cols-md-2">
-                    <div class="col">
+                <div class="row" style="display: flex; align-content: flex-start">
+                    <div class="col" style="alignment: left">
                         <img class="profile-img img-fluid" src={{ profile_picture_uri }}>
                     </div>
                     <div class="col">
                         <div class="row">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif">{{ full_name }}</h3>
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">{{ full_name }}</h3>
                         </div>
                         <div class="row">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif"><a href="https://www.instagram.com/{{ account }}">{{ account }}</a></h3>
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href="https://www.instagram.com/{{ account }}" target="_blank" rel="noopener noreferrer">{{ account }}</a></h3>
                         </div>
                     </div>
                 </div>
@@ -81,43 +81,95 @@
 </section>
 <section>
     <div class="container py-4 py-xl-5" style>
-        <div class="text-center text-white-50 bg-primary border rounded border-0 p-3"
+        <div class="text-center text-white-50 bg-primary border rounded-4 border-0 p-3"
              style="background: linear-gradient(#a02d96, #6d28aa);">
             <div class="row row-cols-2 row-cols-md-5">
                 <div class="col">
                     <div class="p-3">
                         <h4 class="display-5 fw-bold text-white mb-0"
-                            style="font-family: Archivo, sans-serif;">{{ followers_list }}</h4>
+                            style="font-family: Archivo, sans-serif;">{{ followers_list|length }}</h4>
                         <p class="mb-0" style="font-family: Archivo, sans-serif;">Followers</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="p-3">
                         <h4 class="display-5 fw-bold text-white mb-0"
-                            style="font-family: Archivo, sans-serif;">{{ followings_list }}</h4>
+                            style="font-family: Archivo, sans-serif;">{{ followings_list|length }}</h4>
                         <p class="mb-0" style="font-family: Archivo, sans-serif;">Following</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="p-3">
                         <h4 class="display-5 fw-bold text-white mb-0"
-                            style="font-family: Archivo, sans-serif;">{{ mutual_followers }}</h4>
+                            style="font-family: Archivo, sans-serif;">{{ mutual_followers|length }}</h4>
                         <p class="mb-0" style="font-family: Archivo, sans-serif;">Mutual followers</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="p-3">
                         <h4 class="display-5 fw-bold text-white mb-0"
-                            style="font-family: Archivo, sans-serif;">{{ not_following_me_back }}</h4>
+                            style="font-family: Archivo, sans-serif;">{{ not_following_me_back|length }}</h4>
                         <p class="mb-0" style="font-family: Archivo, sans-serif;">Don&#39;t follow you back</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="p-3">
                         <h4 class="display-5 fw-bold text-white mb-0"
-                            style="font-family: Archivo, sans-serif;">{{ i_dont_follow_back }}</h4>
+                            style="font-family: Archivo, sans-serif;">{{ i_dont_follow_back|length }}</h4>
                         <p class="mb-0" style="font-family: Archivo, sans-serif;">You don&#39;t follow back</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-4 py-xl-5">
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs nav-fill nav-tabs-additional" role="tablist"
+                style="font-family: Archivo, sans-serif;font-size: 20px;font-weight: bold;">
+                <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: #d6afd6">Followers List</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: #d6afd6">Followings List</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="color: #d6afd6">Mutual followers list</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: #d6afd6">Accounts that don&#39;t follow you back</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5" style="color: #d6afd6">Accounts you don&#39;t follow back</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active" role="tabpanel">
+                    {% for account in followers_list%}
+                        <div class="row" style="display: flex; align-content: flex-start">
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="tab-2" class="tab-pane" role="tabpanel">
+                    {% for account in followings_list%}
+                        <div class="row" style="display: flex; align-content: flex-start">
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="tab-3" class="tab-pane" role="tabpanel">
+                    {% for account in mutual_followers%}
+                        <div class="row" style="display: flex; align-content: flex-start">
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="tab-4" class="tab-pane" role="tabpanel">
+                    {% for account in not_following_me_back%}
+                        <div class="row" style="display: flex; align-content: flex-start">
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="tab-5" class="tab-pane" role="tabpanel">
+                    {% for account in i_dont_follow_back%}
+                        <div class="row" style="display: flex; align-content: flex-start">
+                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

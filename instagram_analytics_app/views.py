@@ -68,11 +68,11 @@ class FollowersAnalyticsView(View):
                 os.makedirs('instagram_analytics_app/static/profile_pictures')
             shutil.copyfile(profile_picture_uri, os.path.join('instagram_analytics_app', 'static', 'profile_pictures', account.replace(".", "") + '.jpg'))
             profile_picture_uri = os.path.join('/static', "profile_pictures", account.replace(".", "") + '.jpg').replace("\\", "/")
-            context['followers_list'] = len(followers_list)
-            context['followings_list'] = len(followings_list)
-            context['mutual_followers'] = len(mutual_followers)
-            context['not_following_me_back'] = len(not_following_me_back)
-            context['i_dont_follow_back'] = len(i_dont_follow_back)
+            context['followers_list'] = followers_list
+            context['followings_list'] = followings_list
+            context['mutual_followers'] = mutual_followers
+            context['not_following_me_back'] = not_following_me_back
+            context['i_dont_follow_back'] = i_dont_follow_back
             context['account'] = account
             context['full_name'] = full_name
             context['profile_picture_uri'] = profile_picture_uri
