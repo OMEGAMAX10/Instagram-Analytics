@@ -137,39 +137,69 @@
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active" role="tabpanel">
-                    {% for account in followers_list%}
-                        <div class="row" style="display: flex; align-content: flex-start">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
-                        </div>
-                    {% endfor %}
+                    <nav class="navbar navbar-nav-scroll">
+                        <ul>
+                            {% for account in followers_list%}
+                                <li>
+                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
+                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    </h4>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
                 </div>
                 <div id="tab-2" class="tab-pane" role="tabpanel">
-                    {% for account in followings_list%}
-                        <div class="row" style="display: flex; align-content: flex-start">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
-                        </div>
-                    {% endfor %}
+                    <nav class="navbar navbar-nav-scroll">
+                        <ul>
+                            {% for account in followings_list%}
+                                <li>
+                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
+                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    </h4>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
                 </div>
                 <div id="tab-3" class="tab-pane" role="tabpanel">
-                    {% for account in mutual_followers%}
-                        <div class="row" style="display: flex; align-content: flex-start">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
-                        </div>
-                    {% endfor %}
+                    <nav class="navbar navbar-nav-scroll">
+                        <ul>
+                            {% for account in mutual_followers%}
+                                <li>
+                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
+                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    </h4>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
                 </div>
                 <div id="tab-4" class="tab-pane" role="tabpanel">
-                    {% for account in not_following_me_back%}
-                        <div class="row" style="display: flex; align-content: flex-start">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
-                        </div>
-                    {% endfor %}
+                    <nav class="navbar navbar-nav-scroll">
+                        <ul>
+                            {% for account in not_following_me_back%}
+                                <li>
+                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
+                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    </h4>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
                 </div>
                 <div id="tab-5" class="tab-pane" role="tabpanel">
-                    {% for account in i_dont_follow_back%}
-                        <div class="row" style="display: flex; align-content: flex-start">
-                            <h3 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px"><a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a></h3>
-                        </div>
-                    {% endfor %}
+                    <nav class="navbar navbar-nav-scroll">
+                        <ul>
+                            {% for account in i_dont_follow_back%}
+                                <li>
+                                    <h4 style="color: #b5d1e8;font-family: Archivo, sans-serif; margin-right: 30px">
+                                        <a href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                    </h4>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
