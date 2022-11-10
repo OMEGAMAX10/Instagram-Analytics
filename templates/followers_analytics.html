@@ -27,6 +27,55 @@
         .nav-link.active {
             background: linear-gradient(#a02d96, #6d28aa);
         }
+
+        .search-form {
+        }
+
+        .search-form label {
+            color: #d6afd6;
+            margin-left: 80px;
+            margin-bottom: 50px;
+            margin-top: 40px;
+            font-weight: bold;
+            font-size: 22px;
+            font-family: Archivo, sans-serif;
+        }
+
+        .search-form label input[type=text] {
+            display: inline-block;
+            border: 1px solid transparent;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            background: #f1f1f1;
+            min-width: 400px;
+            height: 40px;
+            margin-left: 15px;
+            padding-left: 15px;
+        }
+
+        .search-form label button {
+            display: inline-block;
+            float: right;
+            width: 60px;
+            height: 40px;
+            padding: 10px;
+            background: #a02dc8;
+            color: white;
+            font-size: 17px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border: 1px solid transparent;
+            border-left: none;
+            cursor: pointer;
+        }
+        .search-form label button:hover {
+            background: #a02d96;
+        }
+        .search-form label ::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
     </style>
 </head>
 
@@ -44,14 +93,10 @@
                 class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 30px;font-size: 20px;">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse"
-                                        href="{% url 'followers-analytics' %}"
-                                        style="color: #d6afd6;margin-right: 5px;margin-left: 5px;">Followers
+                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" href="{% url 'followers-analytics' %}" style="color: #d6afd6;margin-right: 5px;margin-left: 5px;">Followers
                     Analytics</a></li>
-                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" href="#"
-                                        style="color: #d6afd6;margin-right: 5px;margin-left: 5px;">Second Item</a></li>
-                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" href="#"
-                                        style="color: #d6afd6;margin-right: 5px;margin-left: 5px;">Third Item</a></li>
+                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" href="#" style="color: #d6afd6;margin-right: 5px;margin-left: 5px;">Second Item</a></li>
+                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" href="#" style="color: #d6afd6;margin-right: 5px;margin-left: 5px;">Third Item</a></li>
             </ul>
         </div>
     </div>
@@ -137,12 +182,19 @@
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active" role="tabpanel">
+                    <form id="search-follower-form" class="search-form" method="POST">
+                        {% csrf_token %}
+                        <label class="form-label" for="search-follower">Search for a follower:
+                            <input id="search-follower" type="text" placeholder="Search...">
+                            <button id="search-follower-button" type="button" class="fa fa-search"></button>
+                        </label>
+                    </form>
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in followers_list%}
-                                <li style="list-style-type: none; background: #86b7fe; border-radius: 10px; margin: 10px 0 10px 50px">
-                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 50px">
-                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                <li style="list-style-type: none; border-radius: 10px; margin: 15px; float: left; width: 360px">
+                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 10px">
+                                        <a style="text-decoration:none; color: #af72c1" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -150,12 +202,19 @@
                     </nav>
                 </div>
                 <div id="tab-2" class="tab-pane" role="tabpanel">
+                    <form id="search-followings-form" class="search-form" method="POST">
+                        {% csrf_token %}
+                        <label class="form-label" for="search-follower">Search for a following:
+                            <input id="search-followings" type="text" placeholder="Search...">
+                            <button id="search-followings-button" type="button" class="fa fa-search"></button>
+                        </label>
+                    </form>
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in followings_list%}
-                                <li>
-                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
-                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                <li style="list-style-type: none; border-radius: 10px; margin: 15px; float: left; width: 360px">
+                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 10px">
+                                        <a style="text-decoration:none; color: #af72c1" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -166,9 +225,9 @@
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in mutual_followers%}
-                                <li>
-                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
-                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                <li style="list-style-type: none; border-radius: 10px; margin: 15px; float: left; width: 360px">
+                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 10px">
+                                        <a style="text-decoration:none; color: #af72c1" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -179,9 +238,9 @@
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in not_following_me_back%}
-                                <li>
-                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
-                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                <li style="list-style-type: none; border-radius: 10px; margin: 15px; float: left; width: 360px">
+                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 10px">
+                                        <a style="text-decoration:none; color: #af72c1" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
@@ -192,9 +251,9 @@
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in i_dont_follow_back%}
-                                <li>
-                                    <h4 style="font-family: Archivo, sans-serif; margin-left: 50px">
-                                        <a style="color: #9663c4" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
+                                <li style="list-style-type: none; border-radius: 10px; margin: 15px; float: left; width: 360px">
+                                    <h4 style="font-family: Archivo, sans-serif;  margin-left: 10px">
+                                        <a style="text-decoration:none; color: #af72c1" href={{ account.href }} target="_blank" rel="noopener noreferrer">{{ account.value }}</a>
                                     </h4>
                                 </li>
                             {% endfor %}
