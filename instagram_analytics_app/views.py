@@ -48,10 +48,15 @@ class FollowersAnalyticsView(View):
         data_dirs = os.listdir('data')
         context = {
             'followers_list': '',
+            'followers_list_count': 0,
             'followings_list': '',
+            'followings_list_count': 0,
             'mutual_followers': '',
+            'mutual_followers_count': 0,
             'not_following_me_back': '',
+            'not_following_me_back_count': 0,
             'i_dont_follow_back': '',
+            'i_dont_follow_back_count': 0,
             'account': '',
             'full_name': '',
             'profile_picture_uri': '',
@@ -75,10 +80,15 @@ class FollowersAnalyticsView(View):
             shutil.copyfile(profile_picture_uri, os.path.join('instagram_analytics_app', 'static', 'profile_pictures', account.replace(".", "") + '.jpg'))
             profile_picture_uri = os.path.join('/static', "profile_pictures", account.replace(".", "") + '.jpg').replace("\\", "/")
             context['followers_list'] = followers_list
+            context['followers_list_count'] = len(followers_list)
             context['followings_list'] = followings_list
+            context['followings_list_count'] = len(followings_list)
             context['mutual_followers'] = mutual_followers
+            context['mutual_followers_count'] = len(mutual_followers)
             context['not_following_me_back'] = not_following_me_back
+            context['not_following_me_back_count'] = len(not_following_me_back)
             context['i_dont_follow_back'] = i_dont_follow_back
+            context['i_dont_follow_back_count'] = len(i_dont_follow_back)
             context['account'] = account
             context['full_name'] = full_name
             context['profile_picture_uri'] = profile_picture_uri

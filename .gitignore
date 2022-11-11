@@ -135,5 +135,8 @@ dmypy.json
 
 
 # Other folders
-data/
+data/*
 instagram_analytics_app/static/profile_pictures/
+
+# Exception from the rule
+!data/.gitkeep

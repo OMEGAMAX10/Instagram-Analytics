@@ -36,7 +36,7 @@
 
 #upload_form button {
     color: #d6afd6;
-    background: #a02d96;
+    background: #a02dc8;
     border: none;
     width: 508px;
     height: 35px;
@@ -50,7 +50,7 @@
 }
 
 #upload_form button:hover {
-    background: #85257d;
+    background: #a02d96;
     border-bottom: 4px solid #6b1c65;
     color: #b391b3;
 }
