@@ -35,14 +35,13 @@
 }
 
 #upload_form button {
-    color: #d6afd6;
-    background: #a02dc8;
+    color: #e6cde6;
+    background: linear-gradient(#af3ca5, #7d37b9);
     border: none;
     width: 508px;
     height: 35px;
     margin: 15px 0 0 -4px;
     border-radius: 16px;
-    border-bottom: 4px solid #85257d;
     transition: all 0.5s ease;
     outline: none;
     font-family: Archivo, sans-serif;
@@ -50,9 +49,7 @@
 }
 
 #upload_form button:hover {
-    background: #a02d96;
-    border-bottom: 4px solid #6b1c65;
-    color: #b391b3;
+    background: linear-gradient(#a02d96, #6d28aa);
 }
 
 #upload_form button span {
