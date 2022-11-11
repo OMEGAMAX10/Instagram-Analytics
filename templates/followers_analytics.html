@@ -28,9 +28,6 @@
             background: linear-gradient(#a02d96, #6d28aa);
         }
 
-        .search-form {
-        }
-
         .search-form label {
             color: #d6afd6;
             margin-left: 80px;
@@ -182,13 +179,16 @@
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active" role="tabpanel">
-                    <form id="search-follower-form" class="search-form" method="POST">
+                    <form class="search-form" method="POST">
                         {% csrf_token %}
-                        <label class="form-label" for="search-follower">Search for a follower:
-                            <input id="search-follower" type="text" placeholder="Search...">
-                            <button id="search-follower-button" type="button" class="fa fa-search"></button>
+                        <label class="form-label">Search for a follower:
+                            <input name="search_follower" id="id_search_follower" type="text" placeholder="Search..." pattern="(?!.*\.\.)(?!.*\.$)[^\W][\w.]{1,29}" title="Insert a valid Instagram username">
+                            <button type="submit" class="fa fa-search"></button>
                         </label>
                     </form>
+                    {% if search_followers and search_followers.strip %}
+                        <h3 style="font-size: 22px;font-family: Archivo, sans-serif;font-weight: bold;color: #d6afd6;">Search results for "{{ search_followers }}":</h3>
+                    {% endif %}
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in followers_list%}
@@ -202,13 +202,16 @@
                     </nav>
                 </div>
                 <div id="tab-2" class="tab-pane" role="tabpanel">
-                    <form id="search-followings-form" class="search-form" method="POST">
+                    <form class="search-form" method="POST">
                         {% csrf_token %}
-                        <label class="form-label" for="search-follower">Search for a following:
-                            <input id="search-followings" type="text" placeholder="Search...">
-                            <button id="search-followings-button" type="button" class="fa fa-search"></button>
+                        <label class="form-label">Search for a following:
+                            <input name="search_following" id="id_search_following" type="text" placeholder="Search..." pattern="(?!.*\.\.)(?!.*\.$)[^\W][\w.]{1,29}" title="Insert a valid Instagram username">
+                            <button type="submit" class="fa fa-search"></button>
                         </label>
                     </form>
+                    {% if search_followings and search_followings.strip %}
+                        <h3 style="font-size: 22px;font-family: Archivo, sans-serif;font-weight: bold;color: #d6afd6;">Search results for "{{ search_followings }}":</h3>
+                    {% endif %}
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in followings_list%}
@@ -222,6 +225,16 @@
                     </nav>
                 </div>
                 <div id="tab-3" class="tab-pane" role="tabpanel">
+                    <form class="search-form" method="POST">
+                        {% csrf_token %}
+                        <label class="form-label">Search for a mutual follower:
+                            <input name="search_mutual_follower" id="id_search_mutual_follower" type="text" placeholder="Search..." pattern="(?!.*\.\.)(?!.*\.$)[^\W][\w.]{1,29}" title="Insert a valid Instagram username">
+                            <button type="submit" class="fa fa-search"></button>
+                        </label>
+                    </form>
+                    {% if search_mutual_followers and search_mutual_followers.strip %}
+                        <h3 style="font-size: 22px;font-family: Archivo, sans-serif;font-weight: bold;color: #d6afd6;">Search results for "{{ search_mutual_followers }}":</h3>
+                    {% endif %}
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in mutual_followers%}
@@ -235,6 +248,16 @@
                     </nav>
                 </div>
                 <div id="tab-4" class="tab-pane" role="tabpanel">
+                    <form class="search-form" method="POST">
+                        {% csrf_token %}
+                        <label class="form-label">Search for an account that doesn&#39;t follow you back:
+                            <input name="search_not_following_me_back" id="id_search_not_following_me_back" type="text" placeholder="Search..." pattern="(?!.*\.\.)(?!.*\.$)[^\W][\w.]{1,29}" title="Insert a valid Instagram username">
+                            <button type="submit" class="fa fa-search"></button>
+                        </label>
+                    </form>
+                    {% if search_not_following_me_back and search_not_following_me_back.strip %}
+                        <h3 style="font-size: 22px;font-family: Archivo, sans-serif;font-weight: bold;color: #d6afd6;">Search results for "{{ search_not_following_me_back }}":</h3>
+                    {% endif %}
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in not_following_me_back%}
@@ -248,6 +271,16 @@
                     </nav>
                 </div>
                 <div id="tab-5" class="tab-pane" role="tabpanel">
+                    <form class="search-form" method="POST">
+                        {% csrf_token %}
+                        <label class="form-label">Search for an account you don&#39;t follow back:
+                            <input name="search_i_dont_follow_back" id="id_search_i_dont_follow_back" type="text" placeholder="Search..." pattern="(?!.*\.\.)(?!.*\.$)[^\W][\w.]{1,29}" title="Insert a valid Instagram username">
+                            <button type="submit" class="fa fa-search"></button>
+                        </label>
+                    </form>
+                    {% if search_i_dont_follow_back and search_i_dont_follow_back.strip %}
+                        <h3 style="font-size: 22px;font-family: Archivo, sans-serif;font-weight: bold;color: #d6afd6;">Search results for "{{ search_i_dont_follow_back }}":</h3>
+                    {% endif %}
                     <nav class="navbar navbar-nav-scroll">
                         <ul>
                             {% for account in i_dont_follow_back%}

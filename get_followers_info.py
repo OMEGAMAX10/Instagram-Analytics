@@ -34,10 +34,5 @@ def get_mutual_followers(followers_list, following_list):
     return mutual_followers
 
 
-def search_followers(followers_list, search_term):
-    search_term = search_term.lower()
-    search_results = [follower for follower in followers_list if search_term in follower['value'].lower()]
-    print("\nSearch results for '{}':".format(search_term))
-    for result in search_results:
-        print(json.dumps(result, indent=2))
-    return search_results
+def search_accounts(search_term, account_list):
+    return [account for account in account_list if search_term.lower() in account['value'].lower()]

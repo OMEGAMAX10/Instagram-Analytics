@@ -12,7 +12,7 @@ from django.views.generic import FormView, View
 
 from get_followers_info import *
 from get_personal_info import *
-from instagram_analytics_app.forms import UploadZipForm
+from instagram_analytics_app.forms import *
 
 
 class InstagramAnalyticsIndexView(FormView):
@@ -42,18 +42,24 @@ class InstagramAnalyticsIndexView(FormView):
 
 class FollowersAnalyticsView(View):
     template = loader.get_template('followers_analytics.html')
+    success_url = reverse_lazy('followers_analytics')
 
     def get_followers_context(self):
         data_dirs = os.listdir('data')
         context = {
-            'followers_list': 0,
-            'followings_list': 0,
-            'mutual_followers': 0,
-            'not_following_me_back': 0,
-            'i_dont_follow_back': 0,
+            'followers_list': '',
+            'followings_list': '',
+            'mutual_followers': '',
+            'not_following_me_back': '',
+            'i_dont_follow_back': '',
             'account': '',
             'full_name': '',
             'profile_picture_uri': '',
+            'search_followers': '',
+            'search_followings': '',
+            'search_mutual_followers': '',
+            'search_not_following_me_back': '',
+            'search_i_dont_follow_back': '',
         }
         if len(data_dirs) > 0:
             data_dirs.sort(reverse=True)
@@ -84,4 +90,70 @@ class FollowersAnalyticsView(View):
 
     def post(self, request, *args, **kwargs):
         context = self.get_followers_context()
+        old_context = context.copy()
+        followers_list_form = FollowersListForm(request.POST)
+        followings_list_form = FollowingsListForm(request.POST)
+        mutual_followers_list_form = MutualFollowersListForm(request.POST)
+        not_following_me_back_list_form = NotFollowingMeBackListForm(request.POST)
+        i_dont_follow_back_list_form = IDontFollowBackListForm(request.POST)
+        if followers_list_form.is_valid():
+            search_term = followers_list_form.cleaned_data['search_follower']
+            context['search_followers'] = search_term
+            context['search_followings'] = ''
+            context['search_mutual_followers'] = ''
+            context['search_not_following_me_back'] = ''
+            context['search_i_dont_follow_back'] = ''
+            context['followers_list'] = search_accounts(search_term, old_context['followers_list'])
+            context['followings_list'] = old_context['followings_list']
+            context['mutual_followers'] = old_context['mutual_followers']
+            context['not_following_me_back'] = old_context['not_following_me_back']
+            context['i_dont_follow_back'] = old_context['i_dont_follow_back']
+        if followings_list_form.is_valid():
+            search_term = followings_list_form.cleaned_data['search_following']
+            context['search_followers'] = ''
+            context['search_followings'] = search_term
+            context['search_mutual_followers'] = ''
+            context['search_not_following_me_back'] = ''
+            context['search_i_dont_follow_back'] = ''
+            context['followers_list'] = old_context['followers_list']
+            context['followings_list'] = search_accounts(search_term, old_context['followings_list'])
+            context['mutual_followers'] = old_context['mutual_followers']
+            context['not_following_me_back'] = old_context['not_following_me_back']
+            context['i_dont_follow_back'] = old_context['i_dont_follow_back']
+        if mutual_followers_list_form.is_valid():
+            search_term = mutual_followers_list_form.cleaned_data['search_mutual_follower']
+            context['search_followers'] = ''
+            context['search_followings'] = ''
+            context['search_mutual_followers'] = search_term
+            context['search_not_following_me_back'] = ''
+            context['search_i_dont_follow_back'] = ''
+            context['followers_list'] = old_context['followers_list']
+            context['followings_list'] = old_context['followings_list']
+            context['mutual_followers'] = search_accounts(search_term, old_context['mutual_followers'])
+            context['not_following_me_back'] = old_context['not_following_me_back']
+            context['i_dont_follow_back'] = old_context['i_dont_follow_back']
+        if not_following_me_back_list_form.is_valid():
+            search_term = not_following_me_back_list_form.cleaned_data['search_not_following_me_back']
+            context['search_followers'] = ''
+            context['search_followings'] = ''
+            context['search_mutual_followers'] = ''
+            context['search_not_following_me_back'] = search_term
+            context['search_i_dont_follow_back'] = ''
+            context['followers_list'] = old_context['followers_list']
+            context['followings_list'] = old_context['followings_list']
+            context['mutual_followers'] = old_context['mutual_followers']
+            context['not_following_me_back'] = search_accounts(search_term, old_context['not_following_me_back'])
+            context['i_dont_follow_back'] = old_context['i_dont_follow_back']
+        if i_dont_follow_back_list_form.is_valid():
+            search_term = i_dont_follow_back_list_form.cleaned_data['search_i_dont_follow_back']
+            context['search_followers'] = ''
+            context['search_followings'] = ''
+            context['search_mutual_followers'] = ''
+            context['search_not_following_me_back'] = ''
+            context['search_i_dont_follow_back'] = search_term
+            context['followers_list'] = old_context['followers_list']
+            context['followings_list'] = old_context['followings_list']
+            context['mutual_followers'] = old_context['mutual_followers']
+            context['not_following_me_back'] = old_context['not_following_me_back']
+            context['i_dont_follow_back'] = search_accounts(search_term, old_context['i_dont_follow_back'])
         return HttpResponse(self.template.render(context, request))
