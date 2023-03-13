@@ -4,7 +4,7 @@ import json
 
 def get_followers_list(data_folder):
     followers_list = json.load(open(os.path.join(data_folder, 'followers_and_following', 'followers.json')))
-    followers_list = [follower['string_list_data'][0] for follower in followers_list["relationships_followers"]]
+    followers_list = [follower['string_list_data'][0] for follower in followers_list]
     followers_list = [{key: val for key, val in follower.items() if key != 'timestamp'} for follower in followers_list]
     return followers_list
 
